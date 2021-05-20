@@ -1,0 +1,217 @@
+def invalid_option_Y_N():
+    # prints invalid answer
+    print('Invalid ansewer, Please input (Y/N): ')
+
+def invalid_option_1_2():
+    # prints invalid answer
+    print('Invalid ansewer, Please input (1/2): ')
+
+def you_died():
+    # prints message when player dies
+    print('You DIED, Now Peaches is also DEAD!')
+
+def start(playing):
+    # Starts the game
+    while playing == True:
+        print('Welcome to Fairy Tail, a text based adventure game!')
+        name = input('What is your name?: ')
+        print('Lets begin, ' + name + '!')
+        print('Your neighbor Peaches, has been abducted by an evil demon \
+        named Muzon! \nMuzon has taken Peaches to a fairy tail world \
+        called "Nezuland"!')
+        entering_game = input('Would you like to teleport you to this magical world to save Peaches!? (Y/N): ').lower()
+        if entering_game == 'n':
+            playing = False
+            print('Peaches DIES! \nThank you for playing Fairy Tail!')
+        while (entering_game != 'y') and (entering_game != 'n'):
+            print('Invalid ansewer, Please input (Y/N)')
+            entering_game = input('Would you like me to teleport you to this magical world to save Peaches!? (Y/N): ').lower()
+            if entering_game == 'n':
+                print('Peaches DIES! \nThank you for playing Fairy Tail!')
+                playing = False
+        if entering_game == 'y':
+            teleport()
+            break        
+        if entering_game == 'n':
+            break
+    return playing 
+
+def end_game(playing):
+    # Ends game or restarts game
+    invalid = False
+    while invalid == False:
+        restart = input('Do you want to restart the game (Y/N)?: ').lower()
+        if restart == 'y':
+            invalid = True
+            return start(playing)
+        elif restart == 'n':
+            invalid = True
+            return True
+        else:
+            invalid_option_Y_N()
+
+def win():
+    # When you win
+    print('Congratulations! \nYou defeated Muzon and rescued Peaches!')
+    print('You and Peaches live a happily ever after!')
+    end_game(playing)
+
+def teleport():
+    # Player teleports into Nezuland and chooses to enter Amazon Jungle or Fire Mountain
+    print("Teleporting you to Nezuland... \n...\n...\n...\nWelcome to Nezuland! \nPeaches is being held in Muzon's infinity castle! You must save her!")
+    world_path = input('There are 2 paths ahead of you. Which path do you choose to take? \n1: Amazon Jungle? \n2: Fire Mountain?: ')
+    if world_path == '1':
+        print('You are now entering the Amazon Jungle! \n...')
+        amazon_jungle()
+    elif world_path == '2':
+        print('You are now entering the Fire Mountain! \n...')
+        fire_mountain()
+    else:
+        invalid_option_1_2()
+        end_game(playing)
+
+def fire_mountain():
+    # This path is short and ends quickly but choosing the correct path takes you to PART 2
+    print('The Fire Mountain looks like its ready to explode! \nYou look to your right and see a hot air balloon!')
+    climb_or_hotairbaloon = input('Do you decide to \n1: Take the hot air balloon? \n2: Climb the mountain?: ')
+    if climb_or_hotairbaloon == '1':
+        print("...\nYou take the hot air balloon and fly high into the sky! \nYou see Muzon's infinity castle and head towards that direction! \n...\n...\n...")
+        print('Oh no! The Fire Mountain is exploding! Your hot air balloon catches on fire!')
+        you_died()
+        end_game(playing)
+    elif climb_or_hotairbaloon == '2':
+        print("...\nAfter 2 hours, you finally made it to the top of Fire Mountain! \nYou can finally see Muzon's infinity castle! YAY!")
+        print('You also see a zip line and a paraglider! \nThe zip line seems to take you towards a jungle.')
+        zipline_or_paraglider = input('Do you wish to take the \n1: Zip line? \n2: Paraglider?: ')
+        if zipline_or_paraglider == '1':
+            amazon_jungle_pt2()
+        elif zipline_or_paraglider == '2':
+            print('...\nYou take the paraglider and fly across the sky towards the infinity castle! \n...\n...\n...')
+            print('Oh no! The Fire Mountain exploding! Your paraglide catches on fire!')
+            you_died()
+            end_game(playing)
+        else:
+            invalid_option_1_2()
+            end_game(playing)
+    else:
+        invalid_option_1_2()
+        end_game(playing)
+
+def amazon_jungle():
+    # Main path that leads to PART 2
+    print('You see a river to the right!')
+    walk_or_river = input('Decide to go continue: \n1: Walking? \n2: Head to the river?: ')
+    if walk_or_river == '1': # Choses the walking option
+        print('...\nYou continue walking and encouter a bunch of vegetation!')
+        pushthrough_or_turnback = input('Do you wish to: \n1: Turn back? \n2: Push through?: ')
+        if pushthrough_or_turnback == '1':
+            print('...\nYou turn back and retrace your steps only to get lost...\nA wild jaguar appears and eats you alive!')
+            you_died()
+            end_game(playing)
+        elif pushthrough_or_turnback == '2':
+            print('...\nYou push through and notice a tribe of dwarfs!')
+            fight_or_run_dwarfs = input('Do you wish to: \n1: Run? \n2: Fight them all?: ')
+            if fight_or_run_dwarfs == '2':
+                print('...\nYou kill: \n1 Dwarf\n2 Dwarfs\n3 Dwarfs\n4 Dwarfs \n5 Dwarfs \nThere are still too many!')
+                print('The evil dwarf army piles on top of you and crushes you to death!')
+                you_died()
+                end_game(playing)
+            elif fight_or_run_dwarfs == '1':
+                print('...\nYou run away silently and avoid being killed by a dwarf army!')
+                amazon_jungle_pt2()
+            else:
+                invalid_option_1_2()
+                end_game(playing)
+        else:
+                invalid_option_1_2()
+                end_game(playing)
+    elif walk_or_river == '2': # Choses the river option
+        print('...\nYou head to the river and ponder how you will go down the river.')
+        print('You realize it will take 5 hours to swim through the river, but also 5 hours to build a raft.')
+        swim_or_raft = input('Do you wish to: \n1: Swim! \n2: Build a raft!: ')
+        if swim_or_raft == '1':
+            print('...\nYou hop into the river and swim!')
+            stopswim_or_swimaround = input('You see a giant crocodile sleeping! What do you do!?: \n1: Stop swimming? \n2: Swim around?: ')
+            if stopswim_or_swimaround == '1':
+                print('...\nThe giant crocodile comes and eats you alive!')
+                you_died()
+                end_game(playing)
+            elif stopswim_or_swimaround == '2':
+                print('...\nYou woke the giant crocodile! He comes and eats you alive!')
+                you_died()
+                end_game(playing)
+            else:
+                invalid_option_1_2()
+                end_game(playing)
+        elif swim_or_raft == '2':
+            print('You build your raft and set sail down the river!')
+            amazon_jungle_pt2()
+        else:
+            invalid_option_1_2()
+            end_game(playing)
+    else:
+        invalid_option_1_2()
+        end_game(playing)
+
+
+def amazon_jungle_pt2():
+    # PART 2 where the all correct paths cross
+    print('...\nYou stumble upon a torn down village and see many dead bodies. \nYou notice one person still barely alive!')
+    ask_or_takecare = input('Do you wish to: \n1: Ask him where Muzan is? \n2: Take care of him first?: ')
+    if ask_or_takecare == '2':
+        print('...\nYou scavenge the area and look for medical supplies...')
+        print('You found a first aid kit! Now you turn back to save the injured man!\n...\n...\n...')
+        print('The injured man is now gone!? \nYou turn around and see him behind you! He turned into a MONSTER!')
+        print('You run... but you are too slow for the evil monster!')
+        you_died()
+        end_game(playing)
+    elif ask_or_takecare == '1':
+        print('...\nYou ask him about Muzan and he tells you that he just attacked his village! The injured man says that he was carrying a beautiful female as well!')
+        print('You are close! You can sense Muzan near! Where could he be!?')
+        topmountain_or_forest = input('The man dies and you leave him behind! Do you wish to: \n1: Continue through the jungle? \n2: Climb the mountain ahead?: ')
+        if topmountain_or_forest == '1':
+            print('...\nYou continue through the jungle.')
+            print('After going through the jungle, you found yourself going in circles.')
+            print('You get exhausted and looks for food and water!...\n...\n...\n...')
+            you_died()
+            end_game(playing)
+        elif topmountain_or_forest == '2':
+            jet_pack_pt3()
+        else:
+            invalid_option_1_2()
+            end_game(playing)
+    else:
+        invalid_option_1_2()
+        end_game(playing)
+                    
+def jet_pack_pt3():
+    # Part 3 where we get to the last part of game
+    print("...\nAfter 3 long hours, you made it to the top of the mountain! \nYou can see Muzon's infinity castle from here!")
+    print('You discover a freakin jet pack and put it on!')
+    gun_or_bomb = input('You also discover guns and bombs, but can only carry one! \nWhich will it be?: \n1: Gun? \n2: Bomb?: ')
+    if gun_or_bomb == '1':
+        print("...\nYou fly towards Muzon's infinity castle and see both him and Peaches!")
+        print('You aim and spray the whole castle down! YAY!\n...\n...\n...')
+        print('You killed Muzon!\n...\n...\n...\nBut unfortunately, you also killed Peaches...')
+        end_game(playing)
+    elif gun_or_bomb == '2':
+        print("...\nYou fly towards Muzon's infinity castle and see both him and Peaches!")
+        print('Peaches sees you and you throw a rope down for her! \nYou see Muzon chasing after Peaches! OH NO!')
+        throw_bomb = input('Do you throw the bomb now!?: \n1: YES! \n2: NO!: ')
+        if throw_bomb == '1':
+            print('...\nPeaches grabs the rope and you quickly drop the BOMB! \nBOOM! \nBAM! \nKABOOM!!! \nPOW!')
+            win()
+        elif throw_bomb == '2':
+            print('...\nPeaches grabs the rope and drop the bomb on accident! \nBOOM! \nBAM! \nKABOOM!!! \nPOW!')
+            win()
+        else:
+            invalid_option_1_2()
+            end_game(playing)
+    else:
+        invalid_option_1_2()
+        end_game(playing)
+
+playing = True
+continues = start(playing)
+if continues == False:
+    end_game(playing)
